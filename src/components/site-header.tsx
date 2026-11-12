@@ -1,8 +1,9 @@
 "use client";
 
 import { IconButton, useColorScheme } from "datui";
-import { Bookmark, Moon, Plane, Sun } from "lucide-react";
+import { Bookmark, Moon, Sun } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "./logo";
 import { useTheme } from "./providers";
 
 export function SiteHeader() {
@@ -12,7 +13,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-20 border-b border-separator bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 tablet:px-6">
         <Link href="/" className="flex items-center gap-2 text-title-3 font-semibold tracking-tight">
-          <Plane className="size-5 -rotate-45" aria-hidden />
+          <Logo size={26} />
           dattrip
         </Link>
         <nav className="flex items-center gap-1" aria-label="Main">

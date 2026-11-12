@@ -1,5 +1,5 @@
-import { Plane } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "./logo";
 
 const LINKS = [
   ["Search", "/#search"],
@@ -13,7 +13,7 @@ export function SiteFooter() {
     <footer className="border-t border-separator">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 tablet:flex-row tablet:items-center tablet:justify-between tablet:px-6">
         <div className="flex items-center gap-2 text-subhead">
-          <Plane className="size-4 -rotate-45" aria-hidden />
+          <Logo size={20} />
           <span className="font-semibold tracking-tight">dattrip</span>
           <span className="text-muted-foreground">© {new Date().getFullYear()}</span>
         </div>
