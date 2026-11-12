@@ -14,7 +14,29 @@ const toOption = (p: Place): ChipOption =>
 const chipLabel = (o: ChipOption) => o.label.replace(/\),.*$/, ")").replace(" (country)", "");
 
 /** Multi-select of cities, airports and (optionally) countries with server-side autocomplete. */
-export function PlaceSelect({ value, onChange, countries = false, placeholder, id, labelledBy, invalid }: { value: string[]; onChange: (codes: string[]) => void; countries?: boolean; placeholder: string; id?: string; labelledBy?: string; invalid?: boolean }) {
+/** Stand-in chip shown while nothing is chosen (the "Anywhere" destination). Never passed to onChange. */
+const EMPTY = "*";
+
+export function PlaceSelect({
+  value,
+  onChange,
+  countries = false,
+  placeholder,
+  emptyLabel,
+  id,
+  labelledBy,
+  invalid,
+}: {
+  value: string[];
+  onChange: (codes: string[]) => void;
+  countries?: boolean;
+  placeholder: string;
+  /** When set, an empty selection shows as a chip with this label instead of a blank field. */
+  emptyLabel?: string;
+  id?: string;
+  labelledBy?: string;
+  invalid?: boolean;
+}) {
   const [options, setOptions] = useState<ChipOption[]>([]);
   const [fetching, setFetching] = useState(false);
   // Remember labels of what was picked this session; codes from the URL fall back to the catalogue.
@@ -50,8 +72,9 @@ export function PlaceSelect({ value, onChange, countries = false, placeholder, i
       id={id}
       aria-labelledby={labelledBy}
       status={invalid ? "error" : undefined}
-      value={value.map((code) => ({ value: code, label: labels[code] ?? labelFor(code) }))}
-      onChange={(chips) => {
+      value={value.length || !emptyLabel ? value.map((code) => ({ value: code, label: labels[code] ?? labelFor(code) })) : [{ value: EMPTY, label: emptyLabel }]}
+      onChange={(all) => {
+        const chips = all.filter((c) => c.value !== EMPTY);
         setLabels((prev) => ({ ...Object.fromEntries(chips.map((c) => [String(c.value), chipLabel(c)])), ...prev }));
         onChange(chips.map((c) => String(c.value)));
       }}
@@ -61,7 +84,7 @@ export function PlaceSelect({ value, onChange, countries = false, placeholder, i
       fetchingLabel="Searching…"
       emptyText="Type a city, airport or code"
       onInputChange={search}
-      placeholder={value.length ? "" : placeholder}
+      placeholder={value.length || emptyLabel ? "" : placeholder}
       closeAfterSelect
     />
   );

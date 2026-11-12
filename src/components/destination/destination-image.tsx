@@ -8,8 +8,8 @@ const sized = (url: string, width: number) =>
   url.includes("images.unsplash.com") ? `${url}${url.includes("?") ? "&" : "?"}w=${width}&q=70&auto=format&fit=crop` : url.replace(/\/\d+px-/, `/${STEPS.find((s) => s >= width) ?? 1920}px-`);
 
 /** Destination photo, or a quiet typographic tile when the catalogue has no photo for it yet. */
-export function DestinationImage({ destination, width = 960, className = "" }: { destination: Destination; width?: number; className?: string }) {
-  if (destination.photo) return <Img src={sized(destination.photo, width)} alt={`${destination.city}, ${destination.country}`} className={`object-cover ${className}`} />;
+export function DestinationImage({ destination, width = 960, className = "", priority = false }: { destination: Destination; width?: number; className?: string; /** Above the fold: load now, not lazily. */ priority?: boolean }) {
+  if (destination.photo) return <Img src={sized(destination.photo, width)} alt={`${destination.city}, ${destination.country}`} className={`object-cover ${className}`} {...(priority ? { loading: "eager" as const, fetchPriority: "high" as const } : {})} />;
   return (
     <div role="img" aria-label={`${destination.city}, ${destination.country}`} className={`flex items-end bg-secondary p-4 ${className}`}>
       <span className="text-display-3 font-semibold tracking-tight text-foreground/15">{destination.code}</span>

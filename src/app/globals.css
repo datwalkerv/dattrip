@@ -28,8 +28,38 @@ body {
     transform: translateY(4px);
   }
 }
+/* First-paint entrance; stagger with an animation-delay utility. */
+.rise {
+  animation: rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Barely-there movement in the hero photo. */
+.hero-drift {
+  animation: hero-drift 24s ease-out both;
+}
+@keyframes hero-drift {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .fade-in {
+  .fade-in,
+  .rise,
+  .hero-drift {
     animation: none;
   }
 }

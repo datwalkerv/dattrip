@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { monthLabel } from "@/lib/format";
 import { CABINS, CURRENCIES, type SearchParamsInput, SearchParamsSchema, toQuery } from "@/lib/search-params";
+import { writePrefs } from "@/lib/prefs";
 import { PlaceSelect } from "./place-select";
 
 type Draft = SearchParamsInput & { to: string[] };
@@ -58,11 +59,24 @@ function Stepper({ label, value, min, max, onChange }: { label: string; value: n
   );
 }
 
-/** The search form. Used large on the homepage and inline on the results page; state goes to the URL on submit. */
-export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?: Partial<SearchParamsInput>; submitLabel?: string }) {
+export interface DraftPatch {
+  /** Change this to apply `values` again. */
+  key: number;
+  values: Partial<SearchParamsInput>;
+}
+
+/**
+ * The search form. Used inside the homepage card and inline on the results page; state goes to the URL on submit.
+ * `patch` lets the page around it fill fields in (a destination card, a quick start, the AI) without losing what was typed.
+ */
+export function SearchForm({ initial, submitLabel = "Search trips", bare = false, patch, remember = false }: { initial?: Partial<SearchParamsInput>; submitLabel?: string; /** No card chrome: the parent provides it. */ bare?: boolean; patch?: DraftPatch; /** Save departure airports, travellers and currency for next time. */ remember?: boolean }) {
   const router = useRouter();
   const [d, setD] = useState<Draft>(() => defaultDraft(initial));
-  const [anywhere, setAnywhere] = useState(!initial?.to?.length);
+  const [applied, setApplied] = useState(patch?.key);
+  if (patch && patch.key !== applied) {
+    setApplied(patch.key);
+    setD((prev) => ({ ...prev, ...patch.values, to: patch.values.to ?? prev.to }));
+  }
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
   // Date pickers mark "today", which differs between the server render and the browser.
@@ -81,17 +95,13 @@ export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const candidate = { ...d, to: anywhere ? [] : d.to, maxBudget: d.maxBudget || undefined };
-    const r = SearchParamsSchema.safeParse(candidate);
+    const r = SearchParamsSchema.safeParse({ ...d, maxBudget: d.maxBudget || undefined });
     if (!r.success) {
       setErrors(Object.fromEntries(r.error.issues.map((i) => [String(i.path[0]), i.message])));
       return;
     }
-    if (!anywhere && !d.to.length) {
-      setErrors({ to: "Add a destination or switch to Anywhere" });
-      return;
-    }
     setErrors({});
+    if (remember) writePrefs({ from: r.data.from, adults: r.data.adults, children: r.data.children, currency: r.data.currency });
     setPending(true);
     router.push(`/search?${toQuery(r.data)}`);
   };
@@ -99,35 +109,13 @@ export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?
   const range: CalendarRangeValue = [fromDay(d.depart), fromDay(d.ret)];
 
   return (
-    <form onSubmit={submit} noValidate className="rounded-xl border border-border bg-card p-2 shadow-md tablet:p-3">
-      <div className="grid items-end gap-x-2 tablet:grid-cols-2">
+    <form onSubmit={submit} noValidate className={bare ? "" : "rounded-xl border border-border bg-card p-2 shadow-md tablet:p-3"}>
+      <div className="grid gap-x-2 tablet:grid-cols-2">
         <FormItem top="From" topId="from-label" status={errors.from ? "error" : undefined} bottom={errors.from}>
           <PlaceSelect labelledBy="from-label" value={d.from} onChange={(from) => set({ from })} placeholder="Budapest, Vienna…" invalid={!!errors.from} />
         </FormItem>
-        <FormItem
-          top={
-            <span className="flex items-center justify-between gap-3">
-              <span id="to-label">To</span>
-              <SegmentedControl
-                aria-label="Destination mode"
-                className="w-56"
-                value={anywhere ? "anywhere" : "choose"}
-                onChange={(v) => setAnywhere(v === "anywhere")}
-                options={[
-                  { value: "anywhere", label: "Anywhere" },
-                  { value: "choose", label: "Choose" },
-                ]}
-              />
-            </span>
-          }
-          status={errors.to ? "error" : undefined}
-          bottom={errors.to}
-        >
-          {anywhere ? (
-            <div className="flex min-h-11 items-center rounded-md border border-dashed border-border px-3 text-subhead text-muted-foreground">The cheapest complete trips, wherever they are</div>
-          ) : (
-            <PlaceSelect labelledBy="to-label" countries value={d.to} onChange={(to) => set({ to })} placeholder="Cities or countries to compare" invalid={!!errors.to} />
-          )}
+        <FormItem top="To" topId="to-label" status={errors.to ? "error" : undefined} bottom={errors.to}>
+          <PlaceSelect labelledBy="to-label" countries emptyLabel="Anywhere" value={d.to} onChange={(to) => set({ to })} placeholder="Anywhere, or cities and countries" invalid={!!errors.to} />
         </FormItem>
       </div>
 
@@ -225,7 +213,7 @@ export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?
         </div>
       )}
 
-      <div className="flex flex-col gap-2 px-3 pb-2 pt-2 tablet:flex-row tablet:items-center tablet:justify-between">
+      <div className="flex flex-col gap-3 px-3 pb-2 pt-3 tablet:flex-row tablet:items-center tablet:justify-between">
         <Popover
           placement="bottom-start"
           content={
@@ -270,7 +258,7 @@ export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?
             {d.maxBudget ? ` · max ${d.maxBudget}` : ""}
           </Button>
         </Popover>
-        <Button type="submit" size="l" loading={pending} before={<Search className="size-4" />} className="tablet:min-w-44">
+        <Button type="submit" size="l" loading={pending} before={<Search className="size-4" />} className="tablet:min-w-56">
           {submitLabel}
         </Button>
       </div>
