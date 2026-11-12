@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { DestinationImage } from "@/components/destination/destination-image";
 import { FlightLegs } from "@/components/flights/flight-legs";
 import { HotelFacts } from "@/components/hotels/hotel-facts";
-import { Img } from "@/components/img";
+import { HotelGallery } from "@/components/hotels/hotel-gallery";
 import { LinkButton } from "@/components/link-button";
 import { AskPanel } from "@/components/trips/ask-panel";
 import { PriceCalendar } from "@/components/trips/price-calendar";
@@ -123,13 +123,7 @@ export default async function TripPage({ params, searchParams }: PageProps<"/tri
             <h2 id="stay-title" className="text-title-2 font-semibold tracking-tight">
               Where you&apos;ll stay
             </h2>
-            {images.length > 0 && (
-              <div className={`mt-4 grid gap-2 overflow-hidden rounded-lg ${images.length >= 3 ? "grid-cols-2 tablet:grid-cols-4" : "grid-cols-1"}`}>
-                {images.slice(0, 5).map((src, i) => (
-                  <Img key={src} src={src} alt={`${h.name}, photo ${i + 1}`} className={`w-full object-cover ${images.length >= 3 && i === 0 ? "col-span-2 row-span-2 h-full max-h-80" : "h-40 tablet:h-[9.75rem]"}`} />
-                ))}
-              </div>
-            )}
+            {images.length > 0 && <HotelGallery images={images} name={h.name} />}
             <div className="mt-4 flex flex-col gap-3">
               <div>
                 <h3 className="text-title-3 font-semibold">{h.name}</h3>
