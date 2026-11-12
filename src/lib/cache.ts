@@ -17,15 +17,19 @@ export function cached<T>(key: string, ttlSec: number, loader: () => Promise<T>,
 
 async function persistent<T>(key: string, ttlSec: number, loader: () => Promise<T>): Promise<T> {
   let called = false;
-  const wrapped = () => {
+  const wrapped = async () => {
     called = true;
-    return loader();
+    return { at: Date.now(), value: await loader() };
   };
+  let hit: { at: number; value: T };
   try {
-    return await unstable_cache(wrapped, ["dattrip", key], { revalidate: ttlSec })();
+    hit = await unstable_cache(wrapped, ["dattrip", key], { revalidate: ttlSec })();
   } catch (e) {
     // Outside a Next.js request (tests, scripts) the data cache is unavailable.
     if (!called) return loader();
     throw e;
   }
+  // The data cache hands back an expired entry once while it refreshes in the background.
+  // A price that old must not be shown as current, so fetch it now instead.
+  return Date.now() - hit.at > ttlSec * 1000 ? loader() : hit.value;
 }

@@ -112,6 +112,7 @@ export function Results({ params }: { params: SearchParams }) {
 
   const states = Object.values(dests);
   const pending = states.filter((s) => s.state === "loading").length;
+  const unpriced = states.filter((s) => s.state === "error" || (s.state === "done" && s.hotelStatus !== "ok")).length;
   const hotelStatus = states.find((s): s is Extract<DestState, { state: "done" }> => s.state === "done" && s.hotelStatus !== "ok")?.hotelStatus;
   const allTrips = useMemo(() => Object.values(dests).flatMap((s) => (s.state === "done" ? s.trips : [])), [dests]);
 
@@ -319,7 +320,11 @@ export function Results({ params }: { params: SearchParams }) {
                 {allTrips.length ? "Loosen a filter to see more." : "No hotel rated 8.0+ within 3 km had availability. Try other dates or switch to Flights only."}
               </Placeholder>
             )}
-            {states.some((s) => s.state === "error") && !pending && <p className="text-footnote text-muted-foreground">Some destinations couldn&apos;t be priced. Search again to retry them.</p>}
+            {!pending && unpriced > 0 && allTrips.length > 0 && (
+              <p className="rounded-md bg-secondary px-3 py-2 text-footnote text-muted-foreground">
+                Hotels for {unpriced} destination{unpriced > 1 ? "s" : ""} couldn&apos;t be priced just now, so {unpriced > 1 ? "they are" : "it is"} missing from this list. Search again to retry.
+              </p>
+            )}
             {!pending && top.length > 0 && <AskPanel trips={top} suggestions={["Which of these is the best deal, and why?", "Compare the top two trips", "Which is best for a relaxed break?"]} />}
           </>
         )}

@@ -128,6 +128,30 @@ export function occupancies(adults: number, children: number) {
   }));
 }
 
+/** LiteAPI rate-limits bursts, so calls from this instance queue up two at a time and a 429 is retried after a pause. */
+const MAX_CONCURRENT = 2;
+let active = 0;
+const waiting: (() => void)[] = [];
+async function call(url: string, init: RequestInit): Promise<unknown> {
+  if (active >= MAX_CONCURRENT) await new Promise<void>((r) => waiting.push(r));
+  else active++;
+  try {
+    for (let attempt = 0; ; attempt++) {
+      try {
+        return await fetchJson(NAME, url, init);
+      } catch (e) {
+        if (!(e instanceof ProviderError) || e.code !== "rate_limited" || attempt === 2) throw e;
+        await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+      }
+    }
+  } finally {
+    // Hand the slot straight to the next caller, or free it.
+    const next = waiting.shift();
+    if (next) next();
+    else active--;
+  }
+}
+
 function headers() {
   const key = env().LITEAPI_KEY;
   if (!key) throw new ProviderError(NAME, "not_configured");
@@ -144,7 +168,7 @@ function hotelsNear(q: HotelQuery): Promise<Static[]> {
     limit: "1000",
   });
   return cached(`liteapi:hotels:v2:${params}`, 86_400, async () => {
-    const raw = await fetchJson(NAME, `${BASE}/data/hotels?${params}`, { headers: headers() });
+    const raw = await call(`${BASE}/data/hotels?${params}`, { headers: headers() });
     const res = z.object({ data: z.array(z.unknown()) }).safeParse(raw);
     if (!res.success) return [];
     return res.data.data.flatMap((x) => {
@@ -168,7 +192,7 @@ export const liteapi: HotelProvider = {
       .slice(0, MAX_HOTELS);
     if (!eligible.length) return [];
     const occ = occupancies(q.adults, q.children);
-    const raw = await fetchJson(NAME, `${BASE}/hotels/rates`, {
+    const raw = await call(`${BASE}/hotels/rates`, {
       method: "POST",
       headers: h,
       body: JSON.stringify({
@@ -192,7 +216,7 @@ export const liteapi: HotelProvider = {
 
   details(id) {
     return cached(`liteapi:hotel:${id}`, 86_400, async () => {
-      const raw = await fetchJson(NAME, `${BASE}/data/hotel?hotelId=${encodeURIComponent(id)}`, { headers: headers() });
+      const raw = await call(`${BASE}/data/hotel?hotelId=${encodeURIComponent(id)}`, { headers: headers() });
       const r = z
         .object({
           data: z.object({

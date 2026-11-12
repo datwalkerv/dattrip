@@ -70,7 +70,11 @@ export function SearchForm({ initial, submitLabel = "Search trips" }: { initial?
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
-  const set = (patch: Partial<Draft>) => setD((prev) => ({ ...prev, ...patch }));
+  const set = (patch: Partial<Draft>) => {
+    setD((prev) => ({ ...prev, ...patch }));
+    // A fixed field shouldn't keep showing its error until the next submit.
+    setErrors((prev) => Object.fromEntries(Object.entries(prev).filter(([k]) => !(k in patch))));
+  };
   const months = nextMonths();
   const isReturn = d.tripType !== "oneway";
   const pax = (d.adults ?? 2) + (d.children ?? 0);
