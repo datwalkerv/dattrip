@@ -1,0 +1,661 @@
+[
+ {
+  "code": "BCN",
+  "city": "Barcelona",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 41.3874,
+  "lng": 2.1686,
+  "tags": [
+   "beach",
+   "city",
+   "warm",
+   "nightlife"
+  ]
+ },
+ {
+  "code": "MAD",
+  "city": "Madrid",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 40.4168,
+  "lng": -3.7038,
+  "tags": [
+   "city",
+   "culture",
+   "nightlife"
+  ]
+ },
+ {
+  "code": "AGP",
+  "city": "Málaga",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 36.7213,
+  "lng": -4.4214,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "ALC",
+  "city": "Alicante",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 38.3452,
+  "lng": -0.481,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun",
+   "budget"
+  ]
+ },
+ {
+  "code": "VLC",
+  "city": "Valencia",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 39.4699,
+  "lng": -0.3763,
+  "tags": [
+   "beach",
+   "city",
+   "warm"
+  ]
+ },
+ {
+  "code": "SVQ",
+  "city": "Seville",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 37.3891,
+  "lng": -5.9845,
+  "tags": [
+   "city",
+   "culture",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "PMI",
+  "city": "Palma de Mallorca",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 39.5696,
+  "lng": 2.6502,
+  "tags": [
+   "beach",
+   "warm",
+   "island"
+  ]
+ },
+ {
+  "code": "TFS",
+  "city": "Tenerife",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 28.0917,
+  "lng": -16.725,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun",
+   "island"
+  ]
+ },
+ {
+  "code": "LPA",
+  "city": "Gran Canaria",
+  "country": "Spain",
+  "countryCode": "ES",
+  "lat": 28.1235,
+  "lng": -15.4363,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun",
+   "island"
+  ]
+ },
+ {
+  "code": "LIS",
+  "city": "Lisbon",
+  "country": "Portugal",
+  "countryCode": "PT",
+  "lat": 38.7223,
+  "lng": -9.1393,
+  "tags": [
+   "city",
+   "culture",
+   "warm"
+  ]
+ },
+ {
+  "code": "OPO",
+  "city": "Porto",
+  "country": "Portugal",
+  "countryCode": "PT",
+  "lat": 41.1496,
+  "lng": -8.6109,
+  "tags": [
+   "city",
+   "culture",
+   "budget"
+  ]
+ },
+ {
+  "code": "FAO",
+  "city": "Faro",
+  "country": "Portugal",
+  "countryCode": "PT",
+  "lat": 37.0194,
+  "lng": -7.9304,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "FNC",
+  "city": "Madeira",
+  "country": "Portugal",
+  "countryCode": "PT",
+  "lat": 32.6496,
+  "lng": -16.9086,
+  "tags": [
+   "nature",
+   "warm",
+   "winter-sun",
+   "island"
+  ]
+ },
+ {
+  "code": "ROM",
+  "city": "Rome",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 41.8933,
+  "lng": 12.4829,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ },
+ {
+  "code": "MIL",
+  "city": "Milan",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 45.4642,
+  "lng": 9.19,
+  "tags": [
+   "city",
+   "shopping"
+  ]
+ },
+ {
+  "code": "VCE",
+  "city": "Venice",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 45.4371,
+  "lng": 12.3326,
+  "tags": [
+   "city",
+   "culture",
+   "romantic"
+  ]
+ },
+ {
+  "code": "NAP",
+  "city": "Naples",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 40.8518,
+  "lng": 14.2681,
+  "tags": [
+   "city",
+   "culture",
+   "warm",
+   "budget"
+  ]
+ },
+ {
+  "code": "BLQ",
+  "city": "Bologna",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 44.4949,
+  "lng": 11.3426,
+  "tags": [
+   "city",
+   "food"
+  ]
+ },
+ {
+  "code": "BRI",
+  "city": "Bari",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 41.1171,
+  "lng": 16.8719,
+  "tags": [
+   "beach",
+   "warm",
+   "budget"
+  ]
+ },
+ {
+  "code": "CTA",
+  "city": "Catania",
+  "country": "Italy",
+  "countryCode": "IT",
+  "lat": 37.5079,
+  "lng": 15.083,
+  "tags": [
+   "beach",
+   "warm",
+   "island"
+  ]
+ },
+ {
+  "code": "PAR",
+  "city": "Paris",
+  "country": "France",
+  "countryCode": "FR",
+  "lat": 48.8566,
+  "lng": 2.3522,
+  "tags": [
+   "city",
+   "culture",
+   "romantic"
+  ]
+ },
+ {
+  "code": "NCE",
+  "city": "Nice",
+  "country": "France",
+  "countryCode": "FR",
+  "lat": 43.7102,
+  "lng": 7.262,
+  "tags": [
+   "beach",
+   "warm"
+  ]
+ },
+ {
+  "code": "LON",
+  "city": "London",
+  "country": "United Kingdom",
+  "countryCode": "GB",
+  "lat": 51.5074,
+  "lng": -0.1278,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ },
+ {
+  "code": "EDI",
+  "city": "Edinburgh",
+  "country": "United Kingdom",
+  "countryCode": "GB",
+  "lat": 55.9533,
+  "lng": -3.1883,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ },
+ {
+  "code": "DUB",
+  "city": "Dublin",
+  "country": "Ireland",
+  "countryCode": "IE",
+  "lat": 53.3498,
+  "lng": -6.2603,
+  "tags": [
+   "city",
+   "nightlife"
+  ]
+ },
+ {
+  "code": "AMS",
+  "city": "Amsterdam",
+  "country": "Netherlands",
+  "countryCode": "NL",
+  "lat": 52.3728,
+  "lng": 4.8936,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ },
+ {
+  "code": "BRU",
+  "city": "Brussels",
+  "country": "Belgium",
+  "countryCode": "BE",
+  "lat": 50.8467,
+  "lng": 4.3525,
+  "tags": [
+   "city",
+   "food"
+  ]
+ },
+ {
+  "code": "BER",
+  "city": "Berlin",
+  "country": "Germany",
+  "countryCode": "DE",
+  "lat": 52.52,
+  "lng": 13.405,
+  "tags": [
+   "city",
+   "nightlife",
+   "culture"
+  ]
+ },
+ {
+  "code": "CPH",
+  "city": "Copenhagen",
+  "country": "Denmark",
+  "countryCode": "DK",
+  "lat": 55.6761,
+  "lng": 12.5683,
+  "tags": [
+   "city",
+   "design"
+  ]
+ },
+ {
+  "code": "STO",
+  "city": "Stockholm",
+  "country": "Sweden",
+  "countryCode": "SE",
+  "lat": 59.3293,
+  "lng": 18.0686,
+  "tags": [
+   "city",
+   "nature"
+  ]
+ },
+ {
+  "code": "OSL",
+  "city": "Oslo",
+  "country": "Norway",
+  "countryCode": "NO",
+  "lat": 59.9139,
+  "lng": 10.7522,
+  "tags": [
+   "city",
+   "nature"
+  ]
+ },
+ {
+  "code": "PRG",
+  "city": "Prague",
+  "country": "Czechia",
+  "countryCode": "CZ",
+  "lat": 50.0875,
+  "lng": 14.4213,
+  "tags": [
+   "city",
+   "culture",
+   "budget"
+  ]
+ },
+ {
+  "code": "KRK",
+  "city": "Kraków",
+  "country": "Poland",
+  "countryCode": "PL",
+  "lat": 50.0614,
+  "lng": 19.9366,
+  "tags": [
+   "city",
+   "culture",
+   "budget"
+  ]
+ },
+ {
+  "code": "WAW",
+  "city": "Warsaw",
+  "country": "Poland",
+  "countryCode": "PL",
+  "lat": 52.2297,
+  "lng": 21.0122,
+  "tags": [
+   "city",
+   "budget"
+  ]
+ },
+ {
+  "code": "ATH",
+  "city": "Athens",
+  "country": "Greece",
+  "countryCode": "GR",
+  "lat": 37.9755,
+  "lng": 23.7348,
+  "tags": [
+   "city",
+   "culture",
+   "warm"
+  ]
+ },
+ {
+  "code": "SKG",
+  "city": "Thessaloniki",
+  "country": "Greece",
+  "countryCode": "GR",
+  "lat": 40.6401,
+  "lng": 22.9444,
+  "tags": [
+   "city",
+   "warm",
+   "budget"
+  ]
+ },
+ {
+  "code": "HER",
+  "city": "Heraklion",
+  "country": "Greece",
+  "countryCode": "GR",
+  "lat": 35.3387,
+  "lng": 25.1442,
+  "tags": [
+   "beach",
+   "warm",
+   "island"
+  ]
+ },
+ {
+  "code": "IST",
+  "city": "Istanbul",
+  "country": "Türkiye",
+  "countryCode": "TR",
+  "lat": 41.0096,
+  "lng": 28.9652,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ },
+ {
+  "code": "AYT",
+  "city": "Antalya",
+  "country": "Türkiye",
+  "countryCode": "TR",
+  "lat": 36.8841,
+  "lng": 30.7056,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "LCA",
+  "city": "Larnaca",
+  "country": "Cyprus",
+  "countryCode": "CY",
+  "lat": 34.9167,
+  "lng": 33.6292,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun",
+   "island"
+  ]
+ },
+ {
+  "code": "MLA",
+  "city": "Malta",
+  "country": "Malta",
+  "countryCode": "MT",
+  "lat": 35.8989,
+  "lng": 14.5146,
+  "tags": [
+   "beach",
+   "warm",
+   "winter-sun",
+   "island",
+   "culture"
+  ]
+ },
+ {
+  "code": "DBV",
+  "city": "Dubrovnik",
+  "country": "Croatia",
+  "countryCode": "HR",
+  "lat": 42.641,
+  "lng": 18.1106,
+  "tags": [
+   "beach",
+   "culture",
+   "warm"
+  ]
+ },
+ {
+  "code": "SPU",
+  "city": "Split",
+  "country": "Croatia",
+  "countryCode": "HR",
+  "lat": 43.5081,
+  "lng": 16.4402,
+  "tags": [
+   "beach",
+   "culture",
+   "warm"
+  ]
+ },
+ {
+  "code": "TIA",
+  "city": "Tirana",
+  "country": "Albania",
+  "countryCode": "AL",
+  "lat": 41.3275,
+  "lng": 19.8187,
+  "tags": [
+   "city",
+   "budget",
+   "warm"
+  ]
+ },
+ {
+  "code": "SOF",
+  "city": "Sofia",
+  "country": "Bulgaria",
+  "countryCode": "BG",
+  "lat": 42.6977,
+  "lng": 23.3219,
+  "tags": [
+   "city",
+   "budget"
+  ]
+ },
+ {
+  "code": "BUH",
+  "city": "Bucharest",
+  "country": "Romania",
+  "countryCode": "RO",
+  "lat": 44.4268,
+  "lng": 26.1025,
+  "tags": [
+   "city",
+   "budget"
+  ]
+ },
+ {
+  "code": "RAK",
+  "city": "Marrakech",
+  "country": "Morocco",
+  "countryCode": "MA",
+  "lat": 31.6295,
+  "lng": -7.9811,
+  "tags": [
+   "city",
+   "culture",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "TLV",
+  "city": "Tel Aviv",
+  "country": "Israel",
+  "countryCode": "IL",
+  "lat": 32.0853,
+  "lng": 34.7818,
+  "tags": [
+   "beach",
+   "city",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "DXB",
+  "city": "Dubai",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "lat": 25.2048,
+  "lng": 55.2708,
+  "tags": [
+   "city",
+   "beach",
+   "warm",
+   "winter-sun"
+  ]
+ },
+ {
+  "code": "BUD",
+  "city": "Budapest",
+  "country": "Hungary",
+  "countryCode": "HU",
+  "lat": 47.4979,
+  "lng": 19.0402,
+  "tags": [
+   "city",
+   "culture",
+   "budget"
+  ]
+ },
+ {
+  "code": "VIE",
+  "city": "Vienna",
+  "country": "Austria",
+  "countryCode": "AT",
+  "lat": 48.2082,
+  "lng": 16.3738,
+  "tags": [
+   "city",
+   "culture"
+  ]
+ }
+]
