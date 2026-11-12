@@ -30,13 +30,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           {FEATURED.map((d) => (
             <li key={d.code}>
               <Link href={`/?to=${d.code}#search`} className="group block overflow-hidden rounded-lg border border-border bg-card transition-shadow hover:shadow-md">
-                <DestinationImage destination={d} width={600} className="aspect-[4/3] w-full transition-transform duration-300 group-hover:scale-[1.03]" />
+                <DestinationImage destination={d} width={500} className="aspect-[4/3] w-full transition-transform duration-300 group-hover:scale-[1.03]" />
                 <div className="p-3">
                   <p className="text-headline-2 font-medium">{d.city}</p>
-                  <p className="text-footnote text-muted-foreground">
-                    {d.country}
-                    {d.photoCredit && ` · Photo: ${d.photoCredit.name} / Unsplash`}
-                  </p>
+                  <p className="text-footnote text-muted-foreground">{d.country}</p>
                 </div>
               </Link>
             </li>

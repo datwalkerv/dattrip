@@ -78,10 +78,10 @@ export default async function TripPage({ params, searchParams }: PageProps<"/tri
           <ArrowLeft className="size-4" aria-hidden /> More trips to {destination.city}
         </Link>
         <div className="relative mt-4 overflow-hidden rounded-xl">
-          <DestinationImage destination={destination} width={1600} className="h-56 w-full tablet:h-80" />
+          <DestinationImage destination={destination} width={1920} className="h-56 w-full tablet:h-80" />
           {destination.photoCredit && (
-            <a href={destination.photoCredit.url} target="_blank" rel="noopener noreferrer" className="absolute bottom-2 right-3 text-caption-2 text-white/80 hover:text-white">
-              Photo: {destination.photoCredit.name} / Unsplash
+            <a href={destination.photoCredit.url} target="_blank" rel="noopener noreferrer" className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-caption-2 text-white/90 hover:text-white">
+              Photo: {destination.photoCredit.name}
             </a>
           )}
         </div>

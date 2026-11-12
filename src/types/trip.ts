@@ -10,6 +10,8 @@ export interface Destination {
   lng: number;
   tags?: string[];
   photo?: string;
+  /** Source id of the photo, kept so the photo script can tell what is already in place. */
+  photoId?: string;
   photoCredit?: { name: string; url: string };
 }
 

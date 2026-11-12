@@ -15,7 +15,7 @@ export function TripCard({ trip, labels = [] }: { trip: Trip; labels?: TripLabel
   return (
     <article className="fade-in grid overflow-hidden rounded-lg border border-border bg-card transition-shadow hover:shadow-md tablet:grid-cols-[240px_1fr]">
       <Link href={`/trip/${trip.id}`} className="relative block" aria-label={`View trip to ${d.city}`}>
-        <DestinationImage destination={d} width={520} className="h-44 w-full tablet:h-full" />
+        <DestinationImage destination={d} width={500} className="h-44 w-full tablet:h-full" />
         {labels.length > 0 && (
           <span className="absolute left-3 top-3 flex flex-wrap gap-1.5">
             {labels.map((l) => (

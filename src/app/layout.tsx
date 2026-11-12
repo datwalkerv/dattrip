@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -40,7 +41,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main className="mx-auto max-w-6xl px-4 pb-24 tablet:px-6">{children}</main>
           <footer className="border-t border-separator">
             <p className="mx-auto max-w-6xl px-4 py-6 text-footnote text-muted-foreground tablet:px-6">
-              dattrip compares prices from Aviasales (flights) and LiteAPI (hotels) and links out to book. Flight prices are recent fares found by other travellers and can change; the final price is the one on the booking site.
+              dattrip compares prices from Aviasales (flights) and LiteAPI (hotels) and links out to book. Flight prices are recent fares found by other travellers and can change; the final price is the one on the booking site.{" "}
+              <Link href="/credits" className="underline underline-offset-2 hover:text-foreground">
+                Photo credits
+              </Link>
             </p>
           </footer>
         </Providers>

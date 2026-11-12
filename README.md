@@ -19,7 +19,7 @@ pnpm dev
 
 A missing key shows a setup notice for that part; nothing is ever filled with sample data.
 
-Destination photos: `UNSPLASH_ACCESS_KEY=... node scripts/build-catalogue.mts` writes photo URLs and credits into `src/lib/catalogue.json`. Commit the result.
+Destination photos come from Unsplash. With `UNSPLASH_ACCESS_KEY` in `.env.local`, `node --env-file=.env.local scripts/build-catalogue.mts --candidates` fetches options and the same command without the flag writes the picks (`LIS=2` chooses another option) into `src/lib/catalogue.json`. Credits are shown at `/credits`.
 
 ## How a search works
 
