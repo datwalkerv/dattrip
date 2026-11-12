@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import type { HotelOffer, HotelRate } from "@/types/hotel";
-import { normalize, occupancies } from "./providers/liteapi";
+import { isExcludedType, normalize, occupancies } from "./providers/liteapi";
 import { cheapestHotel, rankHotels } from "./ranking";
 
 const q = { lat: 41.3874, lng: 2.1686, radiusKm: 3, minRating: 8, checkin: "2027-03-06", checkout: "2027-03-10", adults: 2, children: 0, currency: "EUR" };
@@ -38,6 +38,11 @@ test("keeps room-only and breakfast prices apart, adds pay-at-property fees, dro
   expect(out[0].cheapestRate).toMatchObject({ total: 300, breakfastIncluded: false, refundable: false, payAtProperty: 0 });
   expect(out[0].breakfastRate).toMatchObject({ total: 380, breakfastIncluded: true, refundable: true, payAtProperty: 20, freeCancellationUntil: "2027-03-01 12:00:00" });
   expect(normalize(null, statics as never, q, "now", () => "")).toEqual([]);
+});
+
+test("hostels are excluded, hotels and untyped properties are kept", () => {
+  expect([203, 264].map((hotelTypeId) => isExcludedType({ hotelTypeId }))).toEqual([true, true]);
+  expect([204, 0, null, undefined].map((hotelTypeId) => isExcludedType({ hotelTypeId }))).toEqual([false, false, false, false]);
 });
 
 test("rooms: two adults per room, children in the first", () => {

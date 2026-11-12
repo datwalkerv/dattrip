@@ -14,6 +14,9 @@ const MAX_HOTELS = 150;
 // shortcut: rates need a nationality and children's ages the form doesn't ask for; add inputs if prices differ by market or age.
 const GUEST_NATIONALITY = "HU";
 const CHILD_AGE = 8;
+/** LiteAPI property types left out by default: "Hostels" and "Hostel/Backpacker accommodation" (from GET /data/hotelTypes). */
+const EXCLUDED_TYPE_IDS = new Set([203, 264]);
+export const isExcludedType = (s: { hotelTypeId?: number | null }) => EXCLUDED_TYPE_IDS.has(s.hotelTypeId ?? -1);
 
 const num = z.coerce.number();
 const Static = z.object({
@@ -25,6 +28,7 @@ const Static = z.object({
   main_photo: z.string().nullish(),
   thumbnail: z.string().nullish(),
   stars: num.nullish(),
+  hotelTypeId: num.nullish(),
   rating: num.nullish(),
   reviewCount: num.nullish(),
 });
@@ -139,7 +143,7 @@ function hotelsNear(q: HotelQuery): Promise<Static[]> {
     minRating: String(q.minRating),
     limit: "1000",
   });
-  return cached(`liteapi:hotels:${params}`, 86_400, async () => {
+  return cached(`liteapi:hotels:v2:${params}`, 86_400, async () => {
     const raw = await fetchJson(NAME, `${BASE}/data/hotels?${params}`, { headers: headers() });
     const res = z.object({ data: z.array(z.unknown()) }).safeParse(raw);
     if (!res.success) return [];
@@ -159,7 +163,7 @@ export const liteapi: HotelProvider = {
     const all = await hotelsNear(q);
     // The static filter is re-checked here: never trust the provider to have applied rating and distance.
     const eligible = all
-      .filter((s) => (s.rating ?? 0) >= q.minRating && haversineKm(q.lat, q.lng, s.latitude, s.longitude) <= q.radiusKm)
+      .filter((s) => !isExcludedType(s) && (s.rating ?? 0) >= q.minRating && haversineKm(q.lat, q.lng, s.latitude, s.longitude) <= q.radiusKm)
       .sort((a, b) => (b.reviewCount ?? 0) - (a.reviewCount ?? 0))
       .slice(0, MAX_HOTELS);
     if (!eligible.length) return [];
